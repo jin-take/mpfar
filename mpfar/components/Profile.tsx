@@ -12,7 +12,7 @@ export type ProfileProps = {
   followBy: string[];
   following: string[];
   thesis: string[];
-  snsacccount: string[];
+  snsaccount: string[];
 };
 
 const Profile: React.FC<{ profile: ProfileProps }> = ({ profile }) => {
