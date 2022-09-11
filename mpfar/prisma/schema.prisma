@@ -26,3 +26,52 @@ model User {
   posts         Post[]
   @@map(name: "users")
 }
+
+model Profile {
+  id            String       @default(cuid()) @id
+  name          String?
+  email         String?   @unique
+  comment       String?
+  affiliation   String?
+  society       String[]
+  followBy      Follows[] @relation("following")
+  following     Follows[] @relation("follower")
+  thesis        Thesis[]
+  snsaccount    String[]
+  createdAt     DateTime  @default(now()) @map(name: "created_at")
+  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
+}
+
+model Thesis {
+  id          Int @id @default(autoincrement())
+  title       String
+  abstract    String
+  firstAuthor Profile @relation(fields: [firstAuthorId], references: [id])
+  firstAuthorId String
+  otherAuthor      String[]
+  tags         ThesisOnTag[]
+}
+
+model Tag{
+  id    Int   @id@default(autoincrement())
+  tagName  String
+  thesis   ThesisOnTag[]
+}
+
+model ThesisOnTag {
+  thesis   Thesis   @relation(fields: [thesisId], references: [id])
+  thesisId Int
+  tags      Tag      @relation(fields: [tagId], references: [id])
+  tagId    Int
+
+  @@id([thesisId, tagId])
+}
+
+model Follows {
+  follower    Profile   @relation("follower", fields: [followerId], references: [id])
+  followerId  String
+  following    Profile   @relation("following", fields: [followingId], references: [id])
+  followingId  String
+
+  @@id([followerId, followingId])
+}

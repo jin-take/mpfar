@@ -2,6 +2,7 @@ import React from "react"
 import { GetStaticProps } from "next"
 import Layout from "../components/Layout"
 import Post, { PostProps } from "../components/Post"
+import Profile, { ProfileProps } from "../components/Profile"
 import prisma from '../lib/prisma'
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -13,17 +14,21 @@ export const getStaticProps: GetStaticProps = async () => {
       },
     },
   });
+  const data = await prisma.profile.findMany();
+  const profile = JSON.parse(JSON.stringify(data));
   return {
-    props: { feed },
+    props: { feed, profile },
     revalidate: 10,
   };
 };
 
 type Props = {
-  feed: PostProps[]
+  feed: PostProps[],
+  profile: ProfileProps[]
 }
 
 const Blog: React.FC<Props> = (props) => {
+    console.log(props.profile)
   return (
     <Layout>
       <div className="page">
@@ -32,6 +37,13 @@ const Blog: React.FC<Props> = (props) => {
           {props.feed.map((post) => (
             <div key={post.id} className="post">
               <Post post={post} />
+            </div>
+          ))}
+        </main>
+        <main>
+          {props.profile.map((post2) => (
+            <div key={post2.id} className="post">
+            <Profile profile={post2} />
             </div>
           ))}
         </main>
