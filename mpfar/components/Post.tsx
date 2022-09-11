@@ -13,6 +13,19 @@ export type PostProps = {
   published: boolean;
 };
 
+export type ProfileProps = {
+  id: string;
+  name: string;
+  email: string;
+  comment: string;
+  affiliation: string;
+  society: string[];
+  followBy: string[];
+  following: string[];
+  thesis: string[];
+  snsacccount: string[];
+};
+
 const Post: React.FC<{ post: PostProps }> = ({ post }) => {
   const authorName = post.author ? post.author.name : "Unknown author";
   return (
