@@ -33,20 +33,38 @@ model Profile {
   email         String?   @unique
   comment       String?
   affiliation   String?
-  society       Society[]
+  society       String[]
   followBy      Follows[] @relation("following")
   following     Follows[] @relation("follower")
-  thesis        String[]
+  thesis        Thesis[]
   snsaccount    String[]
   createdAt     DateTime  @default(now()) @map(name: "created_at")
   updatedAt     DateTime  @updatedAt @map(name: "updated_at")
 }
 
-model Society {
-  id            String       @default(cuid()) @id
-  society       String
-  user    Profile?   @relation(fields: [userId], references: [id])
-  userId  String?
+model Thesis {
+  id          Int @id @default(autoincrement())
+  title       String
+  abstract    String
+  firstAuthor Profile @relation(fields: [firstAuthorId], references: [id])
+  firstAuthorId String
+  otherAuthor      String[]
+  tags         ThesisOnTag[]
+}
+
+model Tag{
+  id    Int   @id@default(autoincrement())
+  tagName  String
+  thesis   ThesisOnTag[]
+}
+
+model ThesisOnTag {
+  thesis   Thesis   @relation(fields: [thesisId], references: [id])
+  thesisId Int
+  tags      Tag      @relation(fields: [tagId], references: [id])
+  tagId    Int
+
+  @@id([thesisId, tagId])
 }
 
 model Follows {

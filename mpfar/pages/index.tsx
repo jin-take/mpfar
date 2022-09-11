@@ -16,8 +16,6 @@ export const getStaticProps: GetStaticProps = async () => {
   });
   const data = await prisma.profile.findMany();
   const profile = JSON.parse(JSON.stringify(data));
-  console.log(profile)
-  console.log("www")
   return {
     props: { feed, profile },
     revalidate: 10,
@@ -30,8 +28,7 @@ type Props = {
 }
 
 const Blog: React.FC<Props> = (props) => {
-  console.log(props.profile)
-  console.log(props.feed)
+    console.log(props.profile)
   return (
     <Layout>
       <div className="page">
