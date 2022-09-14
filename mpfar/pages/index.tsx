@@ -4,8 +4,10 @@ import Layout from "../components/Layout"
 import Post, { PostProps } from "../components/Post"
 import Profile, { ProfileProps } from "../components/Profile"
 import prisma from '../lib/prisma'
+import { PrismaClient } from "@prisma/client"
 
 export const getStaticProps: GetStaticProps = async () => {
+  const prisma = new PrismaClient()
   const feed = await prisma.post.findMany({
     where: { published: true },
     include: {
