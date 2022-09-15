@@ -3,6 +3,7 @@ import { GetStaticProps } from "next"
 import Layout from "../components/Layout"
 import Post, { PostProps } from "../components/Post"
 import Profile, { ProfileProps } from "../components/Profile"
+import thesis, { ThesisProps } from "../components/Thesis"
 import prisma from '../lib/prisma'
 import { PrismaClient } from "@prisma/client"
 
@@ -27,10 +28,13 @@ export const getStaticProps: GetStaticProps = async () => {
 type Props = {
   feed: PostProps[],
   profile: ProfileProps[]
+  thesis:ThesisProps[]
 }
 
 const Blog: React.FC<Props> = (props) => {
     console.log(props.profile)
+    console.log(props.feed)
+    console.log(props.thesis)
   return (
     <Layout>
       <div className="page">
@@ -49,6 +53,7 @@ const Blog: React.FC<Props> = (props) => {
             </div>
           ))}
         </main>
+        
       </div>
       <style jsx>{`
         .post {
