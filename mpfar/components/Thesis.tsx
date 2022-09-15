@@ -2,20 +2,42 @@ import React from "react";
 import Router from "next/router";
 import ReactMarkdown from "react-markdown";
 
-export type NameProps = {
-    thesis: string[];
-    abstract:string[];
-    snsaccount: string[];
+export type ThesisProps = {
+    id: number;
+  title :String;
+  abstract : String;
+  firstAuthor :String[];
+  firstAuthorId: String[];
+  otherAuthor   :   String[];
+  tags      :   String[]
 }
 
-const Thesisfile: React.FC<{ Thesisfile: NameProps }> = ({ Thesisfile }) => {
+export type Tag = {
+    id :number;  
+    tagName: String[];
+    thesis: String[];
+}
+
+export type ThesisOnTag ={
+    thesis : String[];
+    thesisId :number;
+    tags : String[];
+    tagId : number;
+}
+
+
+
+const thesis: React.FC<{ thesis: ThesisProps }> = ({ thesis }) => {
     //const authorName = post.author ? post.author.name : "Unknown author";
     return (
       <div>
-      <h1>{Thesisfile.thesis}</h1>
-        <h2>{Thesisfile.abstract}</h2>
-        <h3>{Thesisfile.snsaccount}</h3>
-        
+        <h1>{thesis.id}</h1>
+        <h2>{thesis.title}</h2>
+        <h3>{thesis.abstract}</h3>
+        <h3>{thesis.firstAuthor}</h3>
+        <h3>{thesis.firstAuthorId}</h3>
+        <h3>{thesis.otherAuthor}</h3>
+        <h3>{thesis.tags}</h3>
         <style jsx>{`
           div {
             color: inherit;
@@ -26,4 +48,4 @@ const Thesisfile: React.FC<{ Thesisfile: NameProps }> = ({ Thesisfile }) => {
     );
   };
   
-  export default Thesisfile;
+  export default thesis;
