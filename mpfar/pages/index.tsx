@@ -30,7 +30,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 type Props = {
   feed: PostProps[],
-  profile: ProfileProps[]
+  profile: ProfileProps[],
   thesisfile:ThesisProps[]
 }
 
@@ -38,6 +38,9 @@ const Blog: React.FC<Props> = (props) => {
     console.log(props.profile)
     console.log(props.feed)
     console.log(props.thesisfile)
+
+    const loginUser:ProfileProps = props.profile.find((user) => user.id === 'aaa')
+
   return (
     <Layout>
       <div className="page">
@@ -50,11 +53,9 @@ const Blog: React.FC<Props> = (props) => {
           ))}
         </main>
         <main>
-          {props.profile.map((post2) => (
-            <div key={post2.id} className="post">
-            <Profile profile={post2} />
+            <div className="post">
+            <Profile profile={loginUser}/>
             </div>
-          ))}
         </main>
         <main>
           {props.thesisfile.map((post3) => (
