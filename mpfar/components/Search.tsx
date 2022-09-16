@@ -2,15 +2,43 @@ import { useState, useEffect } from 'react';
 import React from "react"
 import prisma from '../lib/prisma'
 import { PrismaClient } from "@prisma/client"
-import Thesis from "../components/Thesis"
+import { ThesisProps } from "../components/Thesis"
+import { ProfileProps } from "../components/Profile"
 
+type Props = {
+  searchData: {
+    profile: ProfileProps[],
+    thesisfile: ThesisProps[],
+  }
+} 
 
 const Search: React.FC = (searchData) => {
+  const [addtext, setAddText] = useState('');
+  const [text, setText] = useState('');
   /*  const [showItems, setShowItems] = useState<GetStaticProps[]>([]);
     useEffect(() => {
         setShowItems(data);
   }, []);*/
-
+  const SearchResult: React.FC = (search) => {
+    console.log(search)
+  if(search === ''){
+    return
+  }else{
+    const thesisData:ThesisProps = searchData.searchData.thesisfile.filter((thesis) => {
+      return thesis.firstAuthorId === search
+    })
+    return (
+      <main>
+      <p>www</p>
+      {thesisData.map((thesis) => (
+            <div key={thesis.id} className="post">
+            <Thesis thesis={thesis} />
+            </div>
+          ))}
+      </main>
+    )
+  }
+}
   /*const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const result = data.filter((item) => {
       return 
@@ -19,18 +47,20 @@ const Search: React.FC = (searchData) => {
     });
     console.log(result);
   };*/
-  console.log(searchData.profile)
+  console.log(searchData.searchData.profile)
 
   return (
     <div>
       <form action='' className='flex justify-center'>
         <input
           type='text'
-          className='my-8  rounded border border-black'
+          value={addtext}
           placeholder='search'
-          onChange={(e) => handleChange(e)}
+          onChange={(e) => setAddText(e.target.value)}
         />
+        <button onClick={(event) => setText(addtext)}>検索</button>
       </form>
+      <SearchResult search = {text} />
     </div>
   );
 };
