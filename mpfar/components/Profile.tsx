@@ -25,7 +25,6 @@ const Profile: React.FC<{ profile: ProfileProps }> = ({ profile }) => {
       <small> {profile.comment}</small>
       <h3>{profile.affiliation}</h3>
       <h3>{profile.society}</h3>
-      <h3>{profile.snsacccount}</h3>
 
       <style jsx>{`
         div {
@@ -38,3 +37,5 @@ const Profile: React.FC<{ profile: ProfileProps }> = ({ profile }) => {
 };
 
 export default Profile;
+
+
