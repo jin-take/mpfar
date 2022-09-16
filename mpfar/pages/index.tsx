@@ -27,9 +27,8 @@ type Props = {
 }
 
 const Blog: React.FC<Props> = (props) => {
-    console.log(props.profile)
-    console.log(props.feed)
-    console.log(props.thesisfile)
+    //console.log(props.profile)
+    //console.log(props.thesisfile)
 
     const loginUser:ProfileProps = props.profile.find((user) => user.id === 'aaa')
     const loginUserThesis:ThesisProps[] = props.thesisfile.filter((thesis) => {
@@ -53,7 +52,7 @@ const Blog: React.FC<Props> = (props) => {
           ))}
         </main>
       </div>
-      <Search />
+      <Search searchData={props}/>
       <style jsx>{`
         .post {
           background: white;

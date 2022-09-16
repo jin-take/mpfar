@@ -4,7 +4,8 @@ import prisma from '../lib/prisma'
 import { PrismaClient } from "@prisma/client"
 import Thesis from "../components/Thesis"
 
-const Search: React.FC = () => {
+
+const Search: React.FC = (searchData) => {
   /*  const [showItems, setShowItems] = useState<GetStaticProps[]>([]);
     useEffect(() => {
         setShowItems(data);
@@ -18,6 +19,7 @@ const Search: React.FC = () => {
     });
     console.log(result);
   };*/
+  console.log(searchData.profile)
 
   return (
     <div>
