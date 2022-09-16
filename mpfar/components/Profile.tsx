@@ -11,7 +11,8 @@ export type ProfileProps = {
   society: string[];
   followBy: string[];
   following: string[];
-
+  thesis: string[];
+  snsaccount: string[];
 };
 
 const Profile: React.FC<{ profile: ProfileProps }> = ({ profile }) => {
