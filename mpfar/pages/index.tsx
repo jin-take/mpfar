@@ -6,6 +6,7 @@ import Profile, { ProfileProps } from "../components/Profile"
 import thesis, { ThesisProps } from "../components/Thesis"
 import prisma from '../lib/prisma'
 import { PrismaClient } from "@prisma/client"
+import Thesis from "../components/Thesis"
 
 export const getStaticProps: GetStaticProps = async () => {
   const prisma = new PrismaClient()
@@ -19,8 +20,10 @@ export const getStaticProps: GetStaticProps = async () => {
   });
   const data = await prisma.profile.findMany();
   const profile = JSON.parse(JSON.stringify(data));
+  const data_t = await prisma.thesis.findMany();
+  const thesisfile = JSON.parse(JSON.stringify(data_t));
   return {
-    props: { feed, profile },
+    props: { feed, profile,thesisfile},
     revalidate: 10,
   };
 };
@@ -53,7 +56,13 @@ const Blog: React.FC<Props> = (props) => {
             </div>
           ))}
         </main>
-        
+        <main>
+          {props.thesis.map((post3) => (
+            <div key={post3.id} className="post">
+            <Thesis thesis={post3} />
+            </div>
+          ))}
+        </main>
       </div>
       <style jsx>{`
         .post {
