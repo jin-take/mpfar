@@ -3,8 +3,10 @@ import { GetStaticProps } from "next"
 import Layout from "../components/Layout"
 import Post, { PostProps } from "../components/Post"
 import Profile, { ProfileProps } from "../components/Profile"
+import thesis, { ThesisProps } from "../components/Thesis"
 import prisma from '../lib/prisma'
 import { PrismaClient } from "@prisma/client"
+import Thesis from "../components/Thesis"
 
 export const getStaticProps: GetStaticProps = async () => {
   const prisma = new PrismaClient()
@@ -18,8 +20,10 @@ export const getStaticProps: GetStaticProps = async () => {
   });
   const data = await prisma.profile.findMany();
   const profile = JSON.parse(JSON.stringify(data));
+  const data_t = await prisma.thesis.findMany();
+  const thesisfile = JSON.parse(JSON.stringify(data_t));
   return {
-    props: { feed, profile },
+    props: { feed, profile,thesisfile},
     revalidate: 10,
   };
 };
@@ -27,10 +31,13 @@ export const getStaticProps: GetStaticProps = async () => {
 type Props = {
   feed: PostProps[],
   profile: ProfileProps[]
+  thesis:ThesisProps[]
 }
 
 const Blog: React.FC<Props> = (props) => {
     console.log(props.profile)
+    console.log(props.feed)
+    console.log(props.thesis)
   return (
     <Layout>
       <div className="page">
@@ -46,6 +53,13 @@ const Blog: React.FC<Props> = (props) => {
           {props.profile.map((post2) => (
             <div key={post2.id} className="post">
             <Profile profile={post2} />
+            </div>
+          ))}
+        </main>
+        <main>
+          {props.thesis.map((post3) => (
+            <div key={post3.id} className="post">
+            <Thesis thesis={post3} />
             </div>
           ))}
         </main>

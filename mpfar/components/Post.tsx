@@ -26,6 +26,16 @@ export type ProfileProps = {
   snsacccount: string[];
 };
 
+export type ThesisProps = {
+  id: number;
+  title :String;
+  abstract : String;
+  firstAuthor :String[];
+  firstAuthorId: String[];
+  otherAuthor   :   String[];
+  tags      :   String[]
+}
+
 const Post: React.FC<{ post: PostProps }> = ({ post }) => {
   const authorName = post.author ? post.author.name : "Unknown author";
   return (
