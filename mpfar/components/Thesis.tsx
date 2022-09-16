@@ -3,13 +3,13 @@ import Router from "next/router";
 import ReactMarkdown from "react-markdown";
 
 export type ThesisProps = {
-    id: 100;
-  title :"論文タイトル";
-  abstract : ["著者A","著者B","著者C"];
-  firstAuthor :"著者A";
-  firstAuthorId: "AF903";
-  otherAuthor   :["著者B","著者C"] ;
-  tags      :   ["A","B","C"];
+    id: number;
+  title :String;
+  abstract : String[];
+  firstAuthor :String;
+  firstAuthorId: String;
+  otherAuthor   :String[] ;
+  tags      :   String[];
 }
 
 export type Tag = {
