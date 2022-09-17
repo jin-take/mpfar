@@ -30,9 +30,11 @@ const Blog: React.FC<Props> = (props) => {
     //console.log(props.profile)
     //console.log(props.thesisfile)
 
-    const loginUser:ProfileProps = props.profile.find((user) => user.id === 'aaa')
+    let loginUser:ProfileProps = props.profile.find((user) => user.id === 'aaa')
     const loginUserThesis:ThesisProps[] = props.thesisfile.filter((thesis) => {
-      return thesis.firstAuthorId === loginUser.id
+      if(loginUser !== undefined){
+        return thesis.firstAuthorId === loginUser.id
+      }
     })
 
   return (
