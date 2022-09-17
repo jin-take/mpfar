@@ -5,12 +5,12 @@ import { PrismaClient } from "@prisma/client"
 import { ThesisProps } from "../components/Thesis"
 import { ProfileProps } from "../components/Profile"
 
-type Props = {
+/*type Props = {
   searchData: {
     profile: ProfileProps[],
     thesisfile: ThesisProps[],
   }
-} 
+} */
 
 const Search: React.FC = (searchData) => {
   const [addtext, setAddText] = useState('');
