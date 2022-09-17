@@ -17,6 +17,11 @@ export type ProfileProps = {
 
 const Profile: React.FC<{ profile: ProfileProps }> = ({ profile }) => {
   //const authorName = post.author ? post.author.name : "Unknown author";
+  if(profile === undefined){
+    return (
+      <p>not data</p>
+    )
+  }
   return (
     <div>
     <h1>{profile.id}</h1>
