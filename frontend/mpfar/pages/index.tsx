@@ -26,6 +26,15 @@ type Props = {
   thesisfile:ThesisProps[]
 }
 
+/*async function testTranslate(){
+  const url: any = encodeURI(
+        'http://backend:5000/translate/' + 'thank you'
+      )
+    const posts = await fetch(url).then((res) => res.json())
+    console.log(posts)
+}*/
+
+
 const Blog: React.FC<Props> = (props) => {
     //console.log(props.profile)
     //console.log(props.thesisfile)
@@ -36,6 +45,7 @@ const Blog: React.FC<Props> = (props) => {
         return thesis.firstAuthorId === loginUser.id
       }
     })
+    //testTranslate()
 
   return (
     <Layout>
