@@ -1,21 +1,26 @@
 import requests
+from flask import Flask
 
-API_KEY = '#######################' # 自身の API キーを指定
+API_KEY = '################' # 自身の API キーを指定
+app = Flask(__name__)
 
-text = "Riemann Zeta function is a very important function in number theory."
-source_lang = 'EN'
-target_lang = 'JA'
+@app.route("/translate/<text>", methods=["GET"])
+def index(text):
 
-# パラメータの指定
-params = {
-            'auth_key' : API_KEY,
-            'text' : text,
-            'source_lang' : source_lang, # 翻訳対象の言語
-            "target_lang": target_lang  # 翻訳後の言語
-        }
+    #text = "Riemann Zeta function is a very important function in number theory."
+    source_lang = 'EN'
+    target_lang = 'JA'
 
-# リクエストを投げる
-request = requests.post("https://api-free.deepl.com/v2/translate", data=params) # URIは有償版, 無償版で異なるため要注意
-result = request.json()
+    # パラメータの指定
+    params = {
+                'auth_key' : API_KEY,
+                'text' : text,
+                'source_lang' : source_lang, # 翻訳対象の言語
+                "target_lang": target_lang  # 翻訳後の言語
+            }
 
-print(result)
+    # リクエストを投げる
+    request = requests.post("https://api-free.deepl.com/v2/translate", data=params) # URIは有償版, 無償版で異なるため要注意
+    result = request.json()
+
+    return result
