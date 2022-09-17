@@ -1,11 +1,21 @@
 version: '3'
 services:
-  app:
+  frontend:
     build:
-      context: .
+      context: ./frontend
       dockerfile: Dockerfile
     volumes:
-      - ./:/usr/src/app 
+      - ./frontend:/usr/src/app/frontend 
     command: sh -c "cd mpfar && npm run dev"
     ports:
       - "3000:3000"
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    container_name: backend-flask
+    volumes:
+      - ./backend:/usr/src/app/backend
+    command: flask run --host=0.0.0.0
